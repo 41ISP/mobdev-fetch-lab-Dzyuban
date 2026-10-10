@@ -1,16 +1,20 @@
 import LikeButton from '../LikeButton/LikeButton';
 import './MovieCard.css';
 
-function MovieCard() {
+function MovieCard({item}) {
   return (
     <article className="movie-card">
-      <button type="button" className="movie-card__poster-button" aria-label="Открыть страницу фильма «Joker»">
-        <img
+      <button type="button" className="movie-card__poster-button" aria-label="Открыть страницу фильма">
+        // тернанрный оператор здесь проверяет
+        // если значение item.Poster равно "N/A" и это истина то
+        // выдаётся сообщение о том что "постер отсутствует"
+        // если же ложь то код выдаёт на страницу картинку постер 
+        {item.Poster === "N/A" ? ("постер отсутствует") : (<img
           className="movie-card__poster"
-          src="https://m.media-amazon.com/images/M/MV5BNzY3OWQ5NDktNWQ2OC00ZjdlLThkMmItMDhhNDk3NTFiZGU4XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg"
-          alt="Joker"
-        />
-        <span className="movie-card__type">Фильм</span>
+          src={item.Poster} // значение постера (картинка)
+          alt={item.Title} // версия для слабовидящих (текст)
+        />)}
+        <span className="movie-card__type">{item.Type}</span>
       </button>
 
       <div className="movie-card__like">
@@ -18,8 +22,8 @@ function MovieCard() {
       </div>
 
       <div className="movie-card__info">
-        <h3 className="movie-card__title" title="Joker">Joker</h3>
-        <p className="movie-card__year">2019</p>
+        <h3 className="movie-card__title" title="Joker">{item.Title}</h3>
+        <p className="movie-card__year">{item.Year}</p>
       </div>
     </article>
   );
